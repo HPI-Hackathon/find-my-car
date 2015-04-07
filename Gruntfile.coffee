@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 
   grunt.initConfig
 
-    copy:
+    # copy:
 
     exec:
       bower:
@@ -34,7 +34,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", [
     "exec:bower"
-    "copy"
+    # "copy"
   ]
 
   grunt.registerTask "serve", [
