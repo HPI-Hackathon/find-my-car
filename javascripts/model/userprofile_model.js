@@ -1,4 +1,4 @@
-define(["backbone", "underscore" ], function(Backbone, _) {
+define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
     var UserProfile = Backbone.Model.extend({
     	//data attributes
       defaults: {
@@ -10,7 +10,18 @@ define(["backbone", "underscore" ], function(Backbone, _) {
       	extras: null,
       },
 
-    	// converters
+      convertAddress: function(){
+        var self = this;
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + this.address + "&sensor=false";
+        var json = $.getJSON(url, function(json) { return json });
+
+        return json.done(function(response) {
+          var location = response.results[0].geometry.location;
+          self.point = location.lat + "," + location.lng;
+        });
+      },
+
+    	//converters
     	getMinMaxPrice: function(){
     		//setPricePerSMeter();
     		min = pricePerSMeter* 1000 * 0.7;

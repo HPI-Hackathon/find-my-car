@@ -1,4 +1,4 @@
-define(["underscore", "jquery"], function(_, $) {
+define(["underscore", "jquery", app], function(_, $, app) {
   return function () {
 
     var public = {};
@@ -7,22 +7,30 @@ define(["underscore", "jquery"], function(_, $) {
     private.createObject = function (averageCartype) {
       var queryObject = {
         c: [],
+        ecol: [],
         sc: null,
         p: null,
-        ecol: []
+        ll: null
       };
 
+      // Cartypes
       for (var carclass in averageCartype.carclass)
         queryObject.c.push(carclass);
 
+      // Colors
       for (var color in averageCartype.colors)
         queryObject.ecol.push(color);
 
+      // Seats
       var seatsRange = averageCartype.min_seats + ":" + averageCartype.max_seats;
       queryObject.sc = seatsRange;
 
+      // Price
       var priceRange = averageCartype.min_price + ":" + averageCartype.max_price;
       queryObject.p = priceRange;
+
+      // Location
+      queryObject.ll = app.userProfile.point;
 
       return queryObject;
     };
