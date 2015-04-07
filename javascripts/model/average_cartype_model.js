@@ -1,4 +1,4 @@
-define("avg_cartype", ["backbone"], function(Backbone) {
+define(["backbone"], function(Backbone) {
     var AvgCartype = Backbone.Model.extend({
       carclasses: [],
       min_seats: null,
@@ -6,7 +6,12 @@ define("avg_cartype", ["backbone"], function(Backbone) {
       min_price: null,
       max_price: null,
       colors: [],
-      extras: {}
+      extras: {},
+      score: 0, // if Routes: how many routes where gathered? if Rating: how many iterations?
+
+      merge: function(cartype, otherCartype) {
+
+      }
     });
 
     return AvgCartype;

@@ -1,4 +1,4 @@
-define("data-userprofile", function() {
+define(function() {
   return {
     "age": 25,
     "gender": "male",
