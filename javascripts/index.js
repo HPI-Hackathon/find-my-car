@@ -4,6 +4,7 @@ define("app", ["application"], function(Application) {
 
 define(
   ["underscore",
+  "jquery",
   "app",
   "data/routes",
   "data/userprofile",
@@ -14,7 +15,7 @@ define(
   "model/userprofile_model",
   "model/average_cartype_model",
   "model/basevalues_model"],
-  function(_, app, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel) {
+  function(_, $, app, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel) {
 
     function initializeRoutesData() {
       var rawCartypes = _.map(RoutesData.routes, function(route) {
@@ -28,6 +29,8 @@ define(
 
      function update() {
       var routesCartype = app.cartypeCollection.generateAverageCartype();
+      app.profileValidatorService.validateProfile(routesCartype);
+
       var ratingCartype = app.ratings.generateAverageCartype();
       var averageCartype = routesCartype.merge(ratingCartype);
       app.carResults = app.carAdsService.getResults(averageCartype);
@@ -58,8 +61,13 @@ define(
 
     initializeRoutesData();
 
-    // fetch results from mobile.de
-    update();
+    $.when(
+      app.userProfile.convertAddress(), // convert address to latlon
+      function() {
+        // fetch results from mobile.de
+        update();
+      }
+    );
 
 
 });
