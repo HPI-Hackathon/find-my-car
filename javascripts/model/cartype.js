@@ -1,4 +1,4 @@
-define("cartype", ["backbone"], function(Backbone) {
+define(["backbone"], function(Backbone) {
   var Cartype = Backbone.Model.extend({
     // data attributes
     carclass: null,

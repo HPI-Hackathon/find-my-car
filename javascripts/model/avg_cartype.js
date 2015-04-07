@@ -1,4 +1,4 @@
-define("avg_cartype", ["backbone"], function(Backbone) {
+define(["backbone"], function(Backbone) {
     var AvgCartype = Backbone.Model.extend({
       carclasses: [],
       min_seats: null,
