@@ -1,5 +1,5 @@
 define(["backbone"], function(Backbone) {
-    var AvgCartype = Backbone.Model.extend({
+    var AverageCartypeModel = Backbone.Model.extend({
       // data attributes
       defaults: {
         carclasses: [],
@@ -15,11 +15,14 @@ define(["backbone"], function(Backbone) {
       //expectation: ohterCartype is always the rating avgCartype
       merge: function(otherCartype) {
         var weighting = (1 - Math.min(otherCartype.get("score")/100, 1)* 0.8);
-        this.set("min_price", parseInt(this.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)));
-        this.set("max_price", parseInt(this.get("max_price") * weighting + otherCartype.get("max_price") *(1 - weighting)));
-      
+        var mergedCartype = this.clone();
+
+        mergedCartype.set("min_price", parseInt(mergedCartype.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)));
+        mergedCartype.set("max_price", parseInt(mergedCartype.get("max_price") * weighting + otherCartype.get("max_price") *(1 - weighting)));
+
+        return mergedCartype;
       }
     });
 
-    return AvgCartype;
+    return AverageCartypeModel;
 });
