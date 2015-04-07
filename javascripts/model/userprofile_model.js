@@ -1,12 +1,14 @@
 define(["backbone", "underscore" ], function(Backbone, _) {
     var UserProfile = Backbone.Model.extend({
     	//data attributes
-    	age: null,
-    	gender: null,
-    	address: null,
-    	pricePerSMeter: null,
-    	color: null,
-    	extras: null,
+      defaults: {
+      	age: null,
+      	gender: null,
+      	address: null,
+      	pricePerSMeter: null,
+      	color: null,
+      	extras: null,
+      },
 
     	//converters
     	getMinMaxPrice: function(){
