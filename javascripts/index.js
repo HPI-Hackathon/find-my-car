@@ -12,11 +12,13 @@ define(
   "service/route_validator_service",
   "service/profile_validator_service",
   "service/car_ads_service",
+  "service/blacklist_service",
   "collection/cartype_collection",
   "model/userprofile_model",
   "model/average_cartype_model",
-  "model/basevalues_model"],
-  function(_, $, app, Router, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel) {
+  "model/basevalues_model",
+  "model/ads_model"],
+  function(_, $, app, Router, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, BlacklistService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel, AdsModel) {
 
     function initializeRoutesData() {
       var rawCartypes = _.map(RoutesData.routes, function(route) {
@@ -28,15 +30,20 @@ define(
       app.cartypeCollection.add(cartypes);
     }
 
-     function update() {
+    function update() {
       var routesCartype = app.cartypeCollection.generateAverageCartype();
       app.profileValidatorService.validateProfile(routesCartype);
 
       var ratingCartype = app.ratings.generateAverageCartype();
       var averageCartype = routesCartype.merge(ratingCartype);
-      app.carResults = app.carAdsService.getResults(averageCartype);
-      console.log(app.carResults);
-      app.carResults.done(function() { console.log(arguments); });
+
+      // return promise
+      return app.carAdsService.getResults(averageCartype).done(function(response) {
+        var models = _.map(response.items, function(item) {
+          return new AdsModel(item);
+        });
+        app.adsCollection = app.blacklistService.createAdsList(models);
+      });
     }
 
     app.onInitialize(function() {
@@ -44,6 +51,7 @@ define(
       app.routeValidatorService = new RouteValidatorService();
       app.profileValidatorService = new ProfileValidatorService();
       app.carAdsService = new CarAdsService();
+      app.blacklistService = new BlacklistService();
 
       // global models & collections
       app.userProfile = new UserProfileModel(UserData);
