@@ -1,4 +1,4 @@
-define("basevalues", ["backbone"], function(Backbone) {
+define("basevalues", ["backbone", "underscore" ], function(Backbone, _) {
     var BaseValues = Backbone.Model.extend({
       // data attributes
       carclasses: [
@@ -44,11 +44,17 @@ define("basevalues", ["backbone"], function(Backbone) {
 
       // converters
       function addBaseValue(category, name){
-        _.find(this[category], name).score += 1;
+        _.find(this[category], "name").score += 1;
       }
 
       function resetBaseValue(category, name){
-        _.find(this[category], name).score = 0; 
+        _.find(this[category], "name").score = 0; 
+      }
+
+      function getOverallScore(){
+        return _(this.attributes).pluck("score") 
+          .reduce(values, function(memo, num){return memo + num;}, 0)
+          .value();
       }
 
     });
