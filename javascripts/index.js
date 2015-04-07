@@ -29,7 +29,6 @@ define(
      function update() {
       var routesCartype = app.cartypeCollection.generateAverageCartype();
       var ratingCartype = app.ratings.generateAverageCartype();
-      debugger;
       var averageCartype = routesCartype.merge(ratingCartype);
       app.carResults = app.carAdsService.getResults(averageCartype);
       app.carResults.done(function() { console.log(arguments); });
