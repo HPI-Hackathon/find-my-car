@@ -19,8 +19,7 @@ define(["backbone", "model/cartype_model", "model/basevalues_model"], function(B
           averageCartype.min_seats = baseValues.getMinOf("seats");
           averageCartype.max_seats = baseValues.getMaxOf("seats");
 
-          // set count of tracked cartypes
-          averageCartype.score = this.models.length;
+          return averageCartype;
         }
     });
 });
