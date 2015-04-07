@@ -1,0 +1,23 @@
+{
+  "name": "find-my-car",
+  "version": "0.0.0",
+  "homepage": "https://github.com/HPI-Hackathon/find-my-car",
+  "authors": [
+    "Sven Mkw <sven.mkw@gmail.com>"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "materialize": "~0.96.1"
+  }
+}
