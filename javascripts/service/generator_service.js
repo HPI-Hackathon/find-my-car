@@ -1,6 +1,10 @@
-define("generator_service", [""], function() {
-  var GeneratorService = {
-    generateBaseCartype: function() {
+define(["underscore"], function(_) {
+  var GeneratorService = function() {
+
+  };
+
+  _.extend(GeneratorService, {
+    generateRoutesCartype: function(baseValues) {
 
     },
 
@@ -8,10 +12,10 @@ define("generator_service", [""], function() {
 
     },
 
-    generateAverageCartype: function() {
+    generateAverageCartype: function(routesCartype, ratingCartype) {
 
     }
-  };
+  });
 
   return GeneratorService;
 });
