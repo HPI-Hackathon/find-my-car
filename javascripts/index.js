@@ -6,6 +6,7 @@ define(
   ["underscore",
   "jquery",
   "app",
+  "router",
   "data/routes",
   "data/userprofile",
   "service/route_validator_service",
@@ -15,7 +16,7 @@ define(
   "model/userprofile_model",
   "model/average_cartype_model",
   "model/basevalues_model"],
-  function(_, $, app, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel) {
+  function(_, $, app, Router, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel) {
 
     function initializeRoutesData() {
       var rawCartypes = _.map(RoutesData.routes, function(route) {
@@ -68,6 +69,9 @@ define(
     ).done(function() {
         // fetch results from mobile.de
         update();
+
+        app.router = new Router();
+        Backbone.history.start({pushState: true});
       }
     );
 
