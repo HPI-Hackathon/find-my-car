@@ -23,8 +23,6 @@ define([
           averageCartype.set("carclasses", _.pluck(baseValues.getAverageOf("carclasses"), "value"));
           averageCartype.set("min_seats", baseValues.getMinOf("seats").value);
           averageCartype.set("max_seats", baseValues.getMaxOf("seats").value);
-          averageCartype.set("min_price", app.userProfile.getMinPrice());
-          averageCartype.set("max_price", app.userProfile.getMaxPrice());
 
           return averageCartype;
         }

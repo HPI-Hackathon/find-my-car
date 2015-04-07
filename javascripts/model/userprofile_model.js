@@ -14,7 +14,8 @@ define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
     	// converters
       convertAddress: function(){
         var self = this;
-        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + this.address.join(" ") + "&sensor=false";
+        var address = _.reduce(this.get("address"), function(sum, value) { return sum + " " + value; }, "");
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false";
         var json = $.getJSON(url);
 
         return json.done(function(response) {
