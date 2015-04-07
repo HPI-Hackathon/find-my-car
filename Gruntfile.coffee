@@ -36,6 +36,8 @@ module.exports = (grunt) ->
       source:
         files: [
           "_sass/**/*"
+          "javascripts/**/*"
+          "index.html"
         ]
         tasks: [
           "sass"
