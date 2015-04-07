@@ -40,21 +40,25 @@ define(["backbone", "underscore" ], function(Backbone, _) {
         { name: "20001", form: 20001, to: 30000, score: 0 },
         { name: "30001", form: 30001, to: 50000, score: 0 },
         { name: "50001", form: 50001, to: 90000, score: 0 }
-      ]
+      ],
 
       // converters
-      function addBaseValue(category, name){
-        _.find(this[category], "name").score += 1;
-      }
+      addBaseValue: function(category, name){
+        _.find(this[category], name).score += 1;
+      },
 
-      function resetBaseValue(category, name){
-        _.find(this[category], "name").score = 0;
-      }
+      resetBaseValue: function(category, name){
+        _.find(this[category], name).score = 0;
+      },
 
-      function getOverallScore(){
+      getOverallScore: function(){
         return _(this.attributes).pluck("score")
           .reduce(values, function(memo, num){return memo + num;}, 0)
           .value();
+      },
+
+      generateAverageCartype: function() {
+
       }
 
     });

@@ -1,5 +1,3 @@
-define("index", ["backbone", "service/generator_service"], function(Backbone, GeneratorService) {
-  console.log("works", GeneratorService);
+define("index", ["backbone"], function(Backbone) {
 
-  var generatorService = new GeneratorService();
 });
