@@ -63,7 +63,8 @@ define(
     initializeRoutesData();
 
     $.when(
-      app.userProfile.convertAddress() // convert address to latlon
+      app.userProfile.convertAddress(), // convert address to latlon
+      app.userProfile.getPricePerSMeter()
     ).done(function() {
         // fetch results from mobile.de
         update();
