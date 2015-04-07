@@ -9,7 +9,7 @@ define(["backbone"], function(Backbone) {
       extras: {},
       score: 0, // if Routes: how many routes where gathered? if Rating: how many iterations?
 
-      merge: function(cartype, otherCartype) {
+      merge: function(otherCartype) {
 
       }
     });
