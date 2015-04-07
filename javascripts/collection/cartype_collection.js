@@ -1,4 +1,8 @@
-define(["backbone", "model/cartype_model", "model/basevalues_model"], function(Backbone, CartypeModel, BaseValues) {
+define([
+  "backbone",
+  "model/cartype_model",
+  "model/average_cartype_model",
+  "model/basevalues_model"], function(Backbone, CartypeModel, AverageCartypeModel, BaseValues) {
     return Backbone.Collection.extend({
         // only contains only models computed from routes
         // so only carclasses and seats can be answered
@@ -6,7 +10,7 @@ define(["backbone", "model/cartype_model", "model/basevalues_model"], function(B
 
         generateAverageCartype: function() {
           // resulting cartype
-          var averageCartype = new CartypeModel();
+          var averageCartype = new AverageCartypeModel();
           var baseValues = new BaseValues();
 
           _(this.models).each(function(cartype) {
