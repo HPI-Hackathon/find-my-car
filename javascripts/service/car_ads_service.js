@@ -1,4 +1,4 @@
-define(["underscore", "jquery", app], function(_, $, app) {
+define(["underscore", "jquery", "app"], function(_, $, app) {
   return function () {
 
     var public = {};
