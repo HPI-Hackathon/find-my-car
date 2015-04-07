@@ -18,6 +18,9 @@
   ],
   "dependencies": {
     "backbone": "~1.1.2",
-    "materialize": "~0.96.1"
+    "bootstrap-sass": "~3.3.4",
+    "animate-scss": "~1.2.1",
+    "requirejs": "~2.1.17",
+    "jquery": "~2.1.3"
   }
 }
