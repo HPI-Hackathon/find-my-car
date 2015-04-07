@@ -17,7 +17,7 @@ define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
 
         return json.done(function(response) {
           var location = response.results[0].geometry.location;
-          self.point = location.lat + ", " + location.lng;
+          self.point = location.lat + "," + location.lng;
         });
       },
 
