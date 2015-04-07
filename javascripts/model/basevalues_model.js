@@ -43,23 +43,87 @@ define(["backbone", "underscore" ], function(Backbone, _) {
       ],
 
       // converters
-      addBaseValue: function(category, name){
+      addBaseValue: function(category, name) {
         _.find(this[category], name).score += 1;
       },
 
-      resetBaseValue: function(category, name){
+      resetBaseValue: function(category, name) {
         _.find(this[category], name).score = 0;
       },
 
-      getOverallScore: function(){
+      getOverallScore: function() {
         return _(this.attributes).pluck("score")
           .reduce(values, function(memo, num){return memo + num;}, 0)
           .value();
       },
 
+      getFullScore: function(category) {
+        return _(this[category]).pluck("score")
+          .reduce(function(memo, num) { return memo + num; }, 0)
+          .value();
+      },
+
+      getAverageOf: function(category) {
+        if (category === "seats") {
+          throw new Error("average of seats is useless");
+        }
+
+        var average = [];
+        var sorted = _.sort(this[category], "score");
+        var fullScore = this.getFullScore(category);
+        var score = 0;
+
+        while (score/fullScore <= 0.5) {
+          var obj = sorted.shift();
+          average.push(obj);
+          score += obj.score;
+        }
+
+        return average;
+      },
+
+      getMinOf: function(category) {
+        if (category !== "seats") {
+          throw new Error("only minimum of seats is allowed");
+        }
+
+        var min = [];
+        var sorted = _.sort(this[category], "score").reverse();
+        var fullScore = this.getFullScore(category);
+        var score = 0;
+
+        while (score/fullScore <= 0.1) {
+          var obj = sorted.shift();
+          min.push(obj);
+          score += obj.score;
+        }
+
+        return min[min.length-1];
+      },
+
+      getMaxOf: function(category) {
+        if (category !== "seats") {
+          throw new Error("only minimum of seats is allowed");
+        }
+
+        var max = [];
+        var sorted = _.sort(this[category], "score");
+        var fullScore = this.getFullScore(category);
+        var score = 0;
+
+        while (score/fullScore <= 0.1) {
+          var obj = sorted.shift();
+          max.push(obj);
+          score += obj.score;
+        }
+
+        return max[max.length-1];
+      },
+
       generateAverageCartype: function() {
 
       }
+
 
     });
 
