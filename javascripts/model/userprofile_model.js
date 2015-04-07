@@ -26,6 +26,17 @@ define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
         });
       },
 
+      getPricePerSMeter: function(point){
+        var self = this;
+        var url = "http://api.nestoria.de/api?place_name=berlin&encoding=json&action=metadata&country=de&centre_point=" + point;
+        var json = $.getJSON(url + "&callback=?", null, function(json) { return json });
+
+        return json.done(function(respJSON) {
+          var price = respJSON.response.metadata[0].data["2014_m12"].avg_price;
+          self.price = price / 60;
+        });
+      },
+
     	getMinPrice: function() {
     		return this.get("pricePerSMeter") * 1000 * 0.7;
       },
