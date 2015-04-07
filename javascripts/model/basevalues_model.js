@@ -1,5 +1,7 @@
-define(["backbone", "underscore" ], function(Backbone, _) {
-    var BaseValues = Backbone.Model.extend({
+define([
+  "backbone",
+  "model/average_cartype_model" ], function(Backbone, AverageCartypeModel) {
+    return Backbone.Model.extend({
       // data attributes
       defaults: {
         carclasses: [
@@ -46,14 +48,10 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
       // converters
       addBaseValue: function(category, name) {
-        var attr = _.find(this.attributes[category], { name: name });
+        var attr = _.find(this.get(category), { name: name });
         if (attr !== undefined) {
-          attr.score++;
+          this.set(category, _.extend(attr, { score: attr.score+1 }));
         }
-      },
-
-      resetBaseValue: function(category, name) {
-        _.find(this.attributes[category], { name: name }).score = 0;
       },
 
       getOverallScore: function() {
@@ -81,6 +79,11 @@ define(["backbone", "underscore" ], function(Backbone, _) {
         var fullScore = this.getFullScore(category);
         var score = 0;
 
+        // require some data to work with
+        if (fullScore <= 10) {
+          return sorted;
+        }
+
         while (score/fullScore <= 0.5) {
           var obj = sorted.shift();
           average.push(obj.value);
@@ -96,9 +99,14 @@ define(["backbone", "underscore" ], function(Backbone, _) {
         }
 
         var min = [];
-        var sorted = _.sortBy(this.attributes[category], "score").reverse();
+        var sorted = _.sortBy(this.attributes[category], "score");
         var fullScore = this.getFullScore(category);
         var score = 0;
+
+        // require some data to work with
+        if (fullScore <= 10) {
+          return sorted[0];
+        }
 
         while (score/fullScore <= 0.1) {
           var obj = sorted.shift();
@@ -115,9 +123,14 @@ define(["backbone", "underscore" ], function(Backbone, _) {
         }
 
         var max = [];
-        var sorted = _.sortBy(this.attributes[category], "score");
+        var sorted = _.sortBy(this.attributes[category], "score").reverse();
         var fullScore = this.getFullScore(category);
         var score = 0;
+
+        // require some data to work with
+        if (fullScore <= 10) {
+          return sorted[0];
+        }
 
         while (score/fullScore <= 0.1) {
           var obj = sorted.shift();
@@ -129,11 +142,23 @@ define(["backbone", "underscore" ], function(Backbone, _) {
       },
 
       generateAverageCartype: function() {
+        // resulting cartype
+        var averageCartype = new AverageCartypeModel();
 
+        // evaluate the most fitting
+        var prices = this.getAverageOf("priceclasses");
+
+        averageCartype.set({
+          carclasses: _.pluck(this.getAverageOf("carclasses"), "value"),
+          min_seats: this.getMinOf("seats").value,
+          max_seats: this.getMaxOf("seats").value,
+          colors: _.pluck(this.getAverageOf("colors"), "value"),
+          min_price: _.sortBy(prices, function(price) { return price.value.from; })[0].value.from,
+          max_price: _.sortBy(prices, function(price) { return price.value.to; }).reverse()[0].value.to
+        });
+
+        return averageCartype;
       }
 
-
     });
-
-  return BaseValues;
 });

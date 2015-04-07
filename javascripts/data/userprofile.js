@@ -7,7 +7,7 @@ define(function() {
       "zipcode": "10707",
       "street": "Kurfürstendamm 179"
     },
-    "pricePerSMeter": "6.00",
+    "pricePerSMeter": 6,
     "color": "blue",
     "interests": []
   };

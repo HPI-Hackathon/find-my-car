@@ -1,8 +1,9 @@
 define([
   "backbone",
+  "app",
   "model/cartype_model",
   "model/average_cartype_model",
-  "model/basevalues_model"], function(Backbone, CartypeModel, AverageCartypeModel, BaseValues) {
+  "model/basevalues_model"], function(Backbone, app, CartypeModel, AverageCartypeModel, BaseValues) {
     return Backbone.Collection.extend({
         // only contains only models computed from routes
         // so only carclasses and seats can be answered
@@ -19,9 +20,11 @@ define([
           });
 
           // evaluate the most fitting cartypes and seats
-          averageCartype.set("carclasses", baseValues.getAverageOf("carclasses"));
-          averageCartype.set("min_seats", baseValues.getMinOf("seats"));
-          averageCartype.set("max_seats", baseValues.getMaxOf("seats"));
+          averageCartype.set("carclasses", _.pluck(baseValues.getAverageOf("carclasses"), "value"));
+          averageCartype.set("min_seats", baseValues.getMinOf("seats").value);
+          averageCartype.set("max_seats", baseValues.getMaxOf("seats").value);
+          averageCartype.set("min_price", app.userProfile.getMinPrice());
+          averageCartype.set("max_price", app.userProfile.getMaxPrice());
 
           return averageCartype;
         }
