@@ -10,7 +10,7 @@ define(["backbone", "underscore" ], function(Backbone, _) {
       	extras: null,
       },
 
-    	//converters
+    	// converters
     	getMinMaxPrice: function(){
     		//setPricePerSMeter();
     		min = pricePerSMeter* 1000 * 0.7;
