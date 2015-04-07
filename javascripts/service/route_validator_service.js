@@ -11,9 +11,9 @@ define(["underscore", "model/cartype_model"], function(_, CartypeModel) {
     private.carTypes = [];
 
     private.areaCarClasses = {
-      city: ["Kleinwagen", "Kombi"],
-      highway: ["Limousine", "Geländewagen/Pickup", "Caprio/Roadster", "Sportwagen/Coupé"],
-      rural: ["Geländewagen/Pickup", "Kleinwagen", "Caprio/Roadster", "Van/Kleinbus"]
+      city: ["SmallCar", "EstateCar"],
+      highway: ["Limousine", "OffRoad", "Cabrio", "Sportscar"],
+      rural: ["OffRoad", "SmallCar", "Cabrio", "Van"]
     };
 
     public.validateRoute = function (route) {

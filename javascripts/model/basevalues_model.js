@@ -2,44 +2,44 @@ define(["backbone", "underscore" ], function(Backbone, _) {
     var BaseValues = Backbone.Model.extend({
       // data attributes
       carclasses: [
-        { name: "Limousine", score: 0 },
-        { name: "Geländewagen/Pickup", score: 0 },
-        { name: "Kleinwagen", score: 0 },
-        { name: "Caprio/Roadster", score: 0 },
-        { name: "Kombi", score: 0 },
-        { name: "Sportwagen/Coupé", score: 0 },
-        { name: "Van/Kleinbus", score: 0 },
-        { name: "Andere", score: 0 },
+        { name: "EstateCar", value: "EstateCar", score: 0 },
+        { name: "Cabrio", value: "Cabrio", score: 0 },
+        { name: "OffRoad", value: "OffRoad", score: 0 },
+        { name: "Limousine", value: "Limousine", score: 0 },
+        { name: "SmallCar", value: "SmallCar", score: 0 },
+        { name: "SportsCar", value: "SportsCar", score: 0 },
+        { name: "Van", value: "Van", score: 0 },
+        { name: "OtherCar", value: "OtherCar", score: 0 },
       ],
       colors: [
-        { name: "beige", score: 0 },
-        { name: "gold",  score: 0 },
-        { name: "violett", score: 0 },
-        { name: "yellow", score: 0 },
-        { name: "black", score: 0 },
-        { name: "green", score: 0 },
-        { name: "red", score: 0 },
-        { name: "blue", score: 0 },
-        { name: "gray", score: 0 },
-        { name: "silver", score: 0 }
+        { name: "beige", value: "beige", score: 0 },
+        { name: "gold", value: "gold", score: 0 },
+        { name: "violett", value: "violett", score: 0 },
+        { name: "yellow", value: "yellow", score: 0 },
+        { name: "black", value: "black", score: 0 },
+        { name: "green", value: "green", score: 0 },
+        { name: "red", value: "red", score: 0 },
+        { name: "blue", value: "blue", score: 0 },
+        { name: "gray", value: "gray", score: 0 },
+        { name: "silver", value: "silver", score: 0 }
       ],
       seats: [
-        { name: "2", score: 0 },
-        { name: "4", score: 0 },
-        { name: "5", score: 0 },
-        { name: "7", score: 0 },
-        { name: "8", score: 0 },
-        { name: "9", score: 0 }
+        { name: "2", value: 2, score: 0 },
+        { name: "4", value: 4, score: 0 },
+        { name: "5", value: 5, score: 0 },
+        { name: "7", value: 7, score: 0 },
+        { name: "8", value: 8, score: 0 },
+        { name: "9", value: 9, score: 0 }
       ],
       priceclasses: [
-        { name: "0", from: 0, to: 2000, score: 0 },
-        { name: "2001", form: 2001, to: 4000, score: 0 },
-        { name: "4001", form: 4001, to: 8000, score: 0 },
-        { name: "8001", form: 8001, to: 12000, score: 0 },
-        { name: "12001", form: 12001, to: 20000, score: 0 },
-        { name: "20001", form: 20001, to: 30000, score: 0 },
-        { name: "30001", form: 30001, to: 50000, score: 0 },
-        { name: "50001", form: 50001, to: 90000, score: 0 }
+        { name: "0", value: { from: 0, to: 2000 }, score: 0 },
+        { name: "2001", value: { from: 2001, to: 4000 }, score: 0 },
+        { name: "4001", value: { from: 4001, to: 8000 }, score: 0 },
+        { name: "8001", value: { from: 8001, to: 12000 }, score: 0 },
+        { name: "12001", value: { from: 12001, to: 20000 }, score: 0 },
+        { name: "20001", value: { from: 20001, to: 30000 }, score: 0 },
+        { name: "30001", value: { from: 30001, to: 50000 }, score: 0 },
+        { name: "50001", value: { from: 50001, to: 90000 }, score: 0 }
       ],
 
       // converters
@@ -75,7 +75,7 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
         while (score/fullScore <= 0.5) {
           var obj = sorted.shift();
-          average.push(obj);
+          average.push(obj.value);
           score += obj.score;
         }
 
@@ -94,7 +94,7 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
         while (score/fullScore <= 0.1) {
           var obj = sorted.shift();
-          min.push(obj);
+          min.push(obj.value);
           score += obj.score;
         }
 
@@ -113,7 +113,7 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
         while (score/fullScore <= 0.1) {
           var obj = sorted.shift();
-          max.push(obj);
+          max.push(obj.value);
           score += obj.score;
         }
 
