@@ -1,5 +1,5 @@
 define(["underscore", "jquery"], function(_, $) {
-  return function (averageCartype) {
+  return function () {
 
     var public = {};
     var private = {};
@@ -39,11 +39,7 @@ define(["underscore", "jquery"], function(_, $) {
       var queryObject = private.createObject(averageCartype);
       var url = private.createURL(queryObject);
 
-      var results = $.getJSON(url, function(json) {
-        return json;
-      });
-
-      return results;
+      return $.getJSON(url);
     };
 
     return public;
