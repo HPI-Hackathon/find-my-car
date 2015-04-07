@@ -10,6 +10,7 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
         ecol: [],
         sc: null,
         p: null,
+        psz: 100,
         ll: null
       };
 
