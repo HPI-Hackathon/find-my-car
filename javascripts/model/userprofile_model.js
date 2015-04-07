@@ -8,6 +8,7 @@ define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
       	pricePerSMeter: null,
       	color: null,
       	extras: null,
+        point: null,
       },
 
       convertAddress: function(){
