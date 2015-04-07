@@ -34,6 +34,7 @@ define(
       var ratingCartype = app.ratings.generateAverageCartype();
       var averageCartype = routesCartype.merge(ratingCartype);
       app.carResults = app.carAdsService.getResults(averageCartype);
+      console.log(app.carResults);
       app.carResults.done(function() { console.log(arguments); });
     }
 
@@ -62,12 +63,11 @@ define(
     initializeRoutesData();
 
     $.when(
-      app.userProfile.convertAddress(), // convert address to latlon
-      function() {
+      app.userProfile.convertAddress() // convert address to latlon
+    ).done(function() {
         // fetch results from mobile.de
         update();
       }
     );
-
 
 });
