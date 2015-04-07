@@ -46,16 +46,24 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
       // converters
       addBaseValue: function(category, name) {
-        _.find(this.attributes[category], name).score += 1;
+        var attr = _.find(this.attributes[category], { name: name });
+        if (attr !== undefined) {
+          attr.score++;
+        }
       },
 
       resetBaseValue: function(category, name) {
-        _.find(this.attributes[category], name).score = 0;
+        _.find(this.attributes[category], { name: name }).score = 0;
       },
 
       getOverallScore: function() {
-        return _(this.attributes).pluck("score")
-          .reduce(values, function(memo, num){return memo + num;}, 0);
+        return _.reduce(
+          _.map(this.attributes, function(values, category) {
+            return this.getFullScore(category);
+          }),
+          function(sum, num) { return sum + num; },
+          0
+        );
       },
 
       getFullScore: function(category) {
