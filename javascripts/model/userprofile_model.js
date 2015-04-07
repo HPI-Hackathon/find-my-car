@@ -12,15 +12,17 @@ define(["backbone", "underscore", "jquery"], function(Backbone, _, $) {
       },
 
     	// converters
-      convertAddress: function(){
+      convertAddress: function() {
         var self = this;
         var address = _.reduce(this.get("address"), function(sum, value) { return sum + " " + value; }, "");
         var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false";
         var json = $.getJSON(url);
 
-        return json.done(function(response) {
+        return json.then(function(response) {
           var location = response.results[0].geometry.location;
-          self.point = location.lat + "," + location.lng;
+          self.set("point", location.lat + "," + location.lng);
+
+          return response;
         });
       },
 

@@ -14,23 +14,23 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
       };
 
       // Cartypes
-      for (var carclass in averageCartype.carclass)
+      for (var carclass in averageCartype.get("carclass"))
         queryObject.c.push(carclass);
 
       // Colors
-      for (var color in averageCartype.colors)
+      for (var color in averageCartype.get("colors"))
         queryObject.ecol.push(color);
 
       // Seats
-      var seatsRange = averageCartype.min_seats + ":" + averageCartype.max_seats;
+      var seatsRange = averageCartype.get("min_seats") + ":" + averageCartype.get("max_seats");
       queryObject.sc = seatsRange;
 
       // Price
-      var priceRange = averageCartype.min_price + ":" + averageCartype.max_price;
+      var priceRange = averageCartype.get("min_price") + ":" + averageCartype.get("max_price");
       queryObject.p = priceRange;
 
       // Location
-      queryObject.ll = app.userProfile.point;
+      queryObject.ll = app.userProfile.get("point");
 
       return queryObject;
     };
