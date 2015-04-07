@@ -2,7 +2,7 @@
 Function which evaluates a single route and returns a list of cartypes
 */
 
-define(["model/cartype"], function(CartypeModel) {
+define(["underscore", "model/cartype_model"], function(_, CartypeModel) {
   return function (route) {
 
     var public = {};
