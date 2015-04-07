@@ -10,14 +10,14 @@ define(["backbone", "model/cartype_model", "model/basevalues_model"], function(B
           var baseValues = new BaseValues();
 
           _(this.models).each(function(cartype) {
-            baseValues.addBaseValue("carclasses", cartype.carclass);
-            baseValues.addBaseValue("seats", cartype.seats);
+            baseValues.addBaseValue("carclasses", cartype.get("carclass"));
+            baseValues.addBaseValue("seats", cartype.get("seats") );
           });
 
           // evaluate the most fitting cartypes and seats
-          averageCartype.carclasses = baseValues.getAverageOf("carclasses");
-          averageCartype.min_seats = baseValues.getMinOf("seats");
-          averageCartype.max_seats = baseValues.getMaxOf("seats");
+          averageCartype.set("carclasses", baseValues.getAverageOf("carclasses"));
+          averageCartype.set("min_seats", baseValues.getMinOf("seats"));
+          averageCartype.set("max_seats", baseValues.getMaxOf("seats"));
 
           return averageCartype;
         }
