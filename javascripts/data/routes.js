@@ -1,4 +1,4 @@
-define("data-routes", function() {
+define(function() {
   return {
     "routes": [
       {
