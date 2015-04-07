@@ -10,15 +10,16 @@ define(["backbone", "underscore" ], function(Backbone, _) {
 
     	//converters
     	getMinMaxPrice: function(){
-    		//TODO get from location
-    		pricePerSMeter = 6;
-
+    		//setPricePerSMeter();
     		min = pricePerSMeter* 1000 * 0.7;
     		max = pricePerSMeter* 1000 * 1.3;
 
     		return {min: min, max: max};
-    	}
+    	},
 
+    	setPricePerSMeter: function(){
+    		//TODO get from location
+    	}
     });
 
     return UserProfile;
