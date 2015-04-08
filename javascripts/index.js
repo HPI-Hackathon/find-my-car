@@ -38,8 +38,6 @@ define(
       var ratingCartype = app.ratings.generateAverageCartype();
       var averageCartype = routesCartype.merge(ratingCartype);
 
-      var deferred = new $.Deferred();
-
       // return promise
       return app.carAdsService
         .getResults(averageCartype)
