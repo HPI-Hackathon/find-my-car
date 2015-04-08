@@ -25,7 +25,7 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     checkboxChange: function(event) {
       console.log(event);
       if (event.target.checked) {
-        this.model.setValue(event.target.name);
+        this.model.setValue(event.target.name, event.target.attributes[value]);
       } else {
         this.model.unsetValue(event.target.name);
       }
