@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-xs-6">
-          <input class="pull-right" type="checkbox" name="<%= attr.tag %>" data-value="<%= attr.dataValue %>">
+          <input id="<%= attr.tag %>" class="pull-right" type="checkbox" name="<%= attr.tag %>" data-value="<%= attr.dataValue %>"><label class="pull-right" for="<%= attr.tag %>"></label>
         </div>
       </div>
   <% }); %>

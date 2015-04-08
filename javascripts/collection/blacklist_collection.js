@@ -5,13 +5,14 @@ define([
     return Backbone.Collection.extend({
       model: AdsModel,
 
-    	initialize: function(){
-    		this.totalAmount = this.models.length;
+    	initialize: function(inputModels){
+    		this.totalAmount = inputModels.length;
     	},
 
     	getProgress: function(){
     		var finishedAds = this.totalAmount - this.models.length;
-    		return  finishedAds / this.totalAmount * 100;
+    		return finishedAds / this.totalAmount * 100;
+
     	}
     });
 });
