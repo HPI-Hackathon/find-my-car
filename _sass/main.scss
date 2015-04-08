@@ -32,6 +32,12 @@ $brandDefault: #FFFFFF;
 .navbar {
     background-color: $bgDefault;
     border-color: $bgDefault;
+
+    img {
+      padding-top: 12px;
+      padding-left: 12px;
+      height: 36px;
+    }
 }
 .navbar .navbar-brand {
     color: $brandDefault;
