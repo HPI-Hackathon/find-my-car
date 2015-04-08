@@ -6,9 +6,10 @@
   ;
 
 body {
-    padding-top: 50px; /* Required for fixed Navbar */
+    padding-top: 50px; /* Required for fixed navbar */
 }
 
+/* Center elements in row */
 .row-centered {
     text-align:center;
 }
@@ -20,3 +21,16 @@ body {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+/* Color of navbar */
+$bgDefault: #2196F3;
+$brandDefault: #FFFFFF;
+.navbar-inverse {
+    background-color: $bgDefault;
+    border-color: $bgDefault;
+}
+.navbar-inverse .navbar-brand {
+    color: $brandDefault;
+}
+
+
