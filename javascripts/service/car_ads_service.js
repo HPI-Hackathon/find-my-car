@@ -14,7 +14,7 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
         ll: null,
         dam: 0,
         ao: "PICTURES",
-        sb: "ml",
+        sb: "doc",
         rtd: 1
       };
 
