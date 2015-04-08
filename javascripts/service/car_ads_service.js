@@ -11,7 +11,9 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
         sc: null,
         p: null,
         psz: 100,
-        ll: null
+        ll: null,
+        dam: 0,
+        ao: "PICTURES"
       };
 
       // Cartypes
@@ -47,7 +49,6 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
     public.getResults = function (averageCartype) {
       var queryObject = private.createObject(averageCartype);
       var url = private.createURL(queryObject);
-
       return $.getJSON(url);
     };
 
