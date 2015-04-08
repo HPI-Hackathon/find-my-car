@@ -46,6 +46,7 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     next: function() {
+      this.scrollToTop();
       if (app.adsCollection.isEmpty()) {
         app.router.navigate("#", { trigger: true });
         return;
@@ -64,6 +65,10 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
       }
 
       this.active = view;
+    },
+
+    scrollToTop: function() {
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
 
   });
