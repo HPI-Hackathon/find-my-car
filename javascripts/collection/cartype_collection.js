@@ -20,7 +20,7 @@ define([
           });
 
           // evaluate the most fitting cartypes and seats
-          averageCartype.set("carclasses", _.pluck(baseValues.getAverageOf("carclasses"), "value"));
+          averageCartype.set("carclasses", baseValues.getAverageOf("carclasses"));
           averageCartype.set("min_seats", baseValues.getMinOf("seats").value);
           averageCartype.set("max_seats", baseValues.getMaxOf("seats").value);
 
