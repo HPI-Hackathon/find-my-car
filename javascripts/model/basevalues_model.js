@@ -141,6 +141,14 @@ define([
         return max[max.length-1];
       },
 
+      getPriceCategory: function(amount){
+        return _.find( this.attributes["priceclasses"], 
+            function(pclass){ 
+              return pclass.value.from >= amount && pclass.value.to <= amount;
+      }).name;
+
+      },
+
       generateAverageCartype: function() {
         // resulting cartype
         var averageCartype = new AverageCartypeModel();

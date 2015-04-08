@@ -1,8 +1,10 @@
-define(["backbone", "jquery"], function(Backbone, $) {
+define(["backbone", "jquery", "app"], function(Backbone, $, app) {
   return Backbone.Router.extend({
     routes: {
       "": "index",
-      "car/:id": "car"
+      "cars": "cars",
+      "car": "car",
+      "next": "next"
     },
 
     index: function() {
@@ -13,8 +15,33 @@ define(["backbone", "jquery"], function(Backbone, $) {
       });
     },
 
-    car: function(id) {
+    cars: function() {
+      // fetch data from mobile.de
+      app.update().done(function() {
+        if (app.adsCollection.isEmpty()) {
+          app.router.navigate("#");
+          return;
+        }
+        app.router.navigate("#car");
+      });
+    },
 
+    car: function() {
+      var self = this;
+      require(["views/car_view"], function(CarView) {
+        var model = app.adsCollection.unshift();
+        var view = new CarView({ model: model });
+        self.changePage(view);
+      });
+    },
+
+    next: function() {
+      if (app.adsCollection.isEmpty()) {
+        app.router.navigate("#");
+        return;
+      }
+
+      app.router.navigate("#car");
     },
 
     changePage: function(view) {

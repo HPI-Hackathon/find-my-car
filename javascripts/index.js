@@ -31,7 +31,7 @@ define(
       app.cartypeCollection.add(cartypes);
     }
 
-    function update() {
+    app.update = function() {
       var routesCartype = app.cartypeCollection.generateAverageCartype();
       app.profileValidatorService.validateProfile(routesCartype);
 
@@ -45,7 +45,7 @@ define(
         });
         app.adsCollection = app.blacklistService.createAdsList(models);
       });
-    }
+    };
 
     app.onInitialize(function() {
       // services
@@ -59,9 +59,6 @@ define(
       app.ratings = new BaseValuesModel();
       app.cartypeCollection = new CartypeCollection();
     });
-
-    // event
-    app.on("update", update);
 
     // start up
     app.initialize();
@@ -85,7 +82,7 @@ define(
         details.on("sync", function() { console.log(details) });
 
         app.router = new Router();
-        Backbone.history.start({pushState: true});
+        Backbone.history.start();
       }
     );
 
