@@ -74,7 +74,7 @@ define(
       app.userProfile.getPricePerSMeter()
     ).done(function() {
         // fetch results from mobile.de
-        update();
+        app.update();
 
         var details = new DetailsModel({id: "205844426"});
         details.fetch({beforeSend: function(xhr) {xhr.setRequestHeader('Accept-Language', 'de')}});
