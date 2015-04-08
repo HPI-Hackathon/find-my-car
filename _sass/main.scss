@@ -33,6 +33,13 @@ $brandDefault: #FFFFFF;
     color: $brandDefault;
 }
 
+/* Close */
+.close {
+  padding: 12px;
+  color: white;
+  opacity: 0.8;
+}
+
 /* Checkbox */
 input[type=checkbox] {
 display:none;
