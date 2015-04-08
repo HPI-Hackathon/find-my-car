@@ -5,14 +5,14 @@ define([
       // data attributes
       defaults: {
         carclasses: [
-          { name: "EstateCar", value: "EstateCar", score: 0 },
+          { name: "Kombi", value: "Kombi", score: 0 },
           { name: "Cabrio", value: "Cabrio", score: 0 },
-          { name: "OffRoad", value: "OffRoad", score: 0 },
+          { name: "SUV", value: "SUV", score: 0 },
           { name: "Limousine", value: "Limousine", score: 0 },
-          { name: "SmallCar", value: "SmallCar", score: 0 },
-          { name: "SportsCar", value: "SportsCar", score: 0 },
-          { name: "Van", value: "Van", score: 0 },
-          { name: "OtherCar", value: "OtherCar", score: 0 },
+          { name: "Kleinwagen", value: "Kleinwagen", score: 0 },
+          { name: "Sportwagen", value: "Sportwagen", score: 0 },
+          { name: "Kleinbus/Van", value: "Kleinbus/Van", score: 0 },
+          { name: "Andere", value: "Andere", score: 0 },
         ],
         colors: [
           { name: "beige", value: "beige", score: 0 },
