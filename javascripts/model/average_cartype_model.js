@@ -14,11 +14,11 @@ define(["backbone"], function(Backbone) {
 
       // expectation: ohterCartype is always the rating avgCartype
       merge: function(otherCartype) {
-        var weighting = (1 - Math.min(otherCartype.get("score")/100, 1) * 0.8);
+        var weighting = (1 - Math.min(otherCartype.get("score")/20, 1) * 0.8);
         var mergedCartype = this.clone();
 
         mergedCartype.set({
-          min_price: 0.5 * parseInt(mergedCartype.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)),
+          min_price: 1 * parseInt(mergedCartype.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)),
           max_price: 2 * parseInt(mergedCartype.get("max_price") * weighting + otherCartype.get("max_price") *(1 - weighting)),
 
           min_seats: parseInt(mergedCartype.get("min_seats") * weighting + otherCartype.get("min_seats") *(1 - weighting)),
@@ -27,7 +27,8 @@ define(["backbone"], function(Backbone) {
           colors: _.union(mergedCartype.get("colors"), otherCartype.get("colors")),
           carclasses: _.union(mergedCartype.get("carclasses"), otherCartype.get("carclasses"))
         });
-
+        console.log("score: ", otherCartype);
+        console.log("merge: " ,weighting);
         return mergedCartype;
       }
     });

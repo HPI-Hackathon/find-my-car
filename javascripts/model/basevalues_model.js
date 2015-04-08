@@ -48,19 +48,29 @@ define([
 
       // converters
       addBaseValue: function(category, name) {
-        var attr = _.find(this.get(category), { name: name });
+        var attr = _.clone(_.find(this.get(category), { name: name }));
         if (attr !== undefined) {
-          var attrs = this.get(category);
+          var attrs = _.clone(this.get(category));
           attr.score++;
-          attrs[attrs.indexOf(attr)] = attr;
+          for (var i = 0; i < attrs.length; i++) {
+            if (attrs[i].name == attr.name) {
+              attrs[i] = attr;
+              break;
+            }
+          }
+          //sattrs[attrs.indexOf(attr)] = attr;
           this.set(category, attrs);
         }
       },
 
       getOverallScore: function() {
+        var self = this;
+        console.log(_.map(this.attributes, function(values, category) {
+            return self.getFullScore(category);
+          }), this);
         return _.reduce(
           _.map(this.attributes, function(values, category) {
-            return this.getFullScore(category);
+            return self.getFullScore(category);
           }),
           function(sum, num) { return sum + num; },
           0
@@ -68,6 +78,7 @@ define([
       },
 
       getFullScore: function(category) {
+        
         return _(this.attributes[category]).pluck("score")
           .reduce(function(memo, num) { return memo + num; }, 0);
       },
@@ -168,7 +179,8 @@ define([
           max_seats: this.getMaxOf("seats").value,
           colors: _.pluck(this.getAverageOf("colors"), "value"),
           min_price: _.sortBy(prices, function(price) { return price.value.from; })[0].value.from,
-          max_price: _.sortBy(prices, function(price) { return price.value.to; }).reverse()[0].value.to
+          max_price: _.sortBy(prices, function(price) { return price.value.to; }).reverse()[0].value.to,
+          score: this.getOverallScore()
         });
 
         return averageCartype;
