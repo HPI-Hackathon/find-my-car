@@ -50,7 +50,10 @@ define([
       addBaseValue: function(category, name) {
         var attr = _.find(this.get(category), { name: name });
         if (attr !== undefined) {
-          this.set(category, _.extend(attr, { score: attr.score+1 }));
+          var attrs = this.get(category);
+          attr.score++;
+          attrs[attrs.indexOf(attr)] = attr;
+          this.set(category, attrs);
         }
       },
 
@@ -144,7 +147,7 @@ define([
       getPriceCategory: function(amountString) {
         var amount = parseInt(amountString);
         var priceclass = _.find(this.attributes.priceclasses, function(pclass) {
-          return pclass.value.from <= amount && pclass.value.to <= amount;
+          return pclass.value.from <= amount && amount <= pclass.value.to;
         });
 
         if (priceclass.name) {
