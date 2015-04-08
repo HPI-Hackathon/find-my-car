@@ -10,7 +10,7 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     initialize: function(options){
     	this.detailsModel = options.detailsModel;
     	this.templateHelper = {
-    		attributes: 
+    		attributes:
     			[
     			  {
     			 	label: "Autotyp",
@@ -23,11 +23,11 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     			 	value: this.detailsModel.get("price").grs.amount
     			 }
     			].concat(this.detailsModel.attributes),
-    			images: this.model.get("images"),
-    			title: this.model.get("title"),
-    			url: this.model.get("url"),
-    			description: this.detailsModel.get("description"),
-    			percentage: app.adsCollection.getProgress()
+  			images: this.model.get("images"),
+  			title: this.model.get("title"),
+  			url: this.model.get("url"),
+  			description: this.detailsModel.get("description"),
+  			percentage: app.adsCollection.getProgress()
     	};
     },
 
