@@ -25,12 +25,11 @@ body {
 /* Color of navbar */
 $bgDefault: #2196F3;
 $brandDefault: #FFFFFF;
-.navbar-inverse {
+.navbar {
     background-color: $bgDefault;
     border-color: $bgDefault;
 }
-.navbar-inverse .navbar-brand {
+.navbar .navbar-brand {
     color: $brandDefault;
 }
-
 
