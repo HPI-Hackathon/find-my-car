@@ -24,14 +24,14 @@
     </div>
   </div>
 
-  <% _.each(attributes, function(value) { %>
+  <% _.each(attributes, function(attr) { %>
       <div class="row">
         <div class="col-xs-6">
-          <p><%= value %></p>
+          <p><%= attr.label %>: <%= attr.value %></p>
         </div>
 
         <div class="col-xs-6">
-          <input class="pull-right" type="checkbox" value="">
+          <input class="pull-right" type="checkbox" name="<%= attr.tag %>" data-value="<%= attr.dataValue %>">
         </div>
       </div>
   <% }); %>
