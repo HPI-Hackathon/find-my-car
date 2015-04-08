@@ -39,11 +39,13 @@ define(
       var averageCartype = routesCartype.merge(ratingCartype);
 
       // return promise
-      return app.carAdsService.getResults(averageCartype).done(function(response) {
-        var models = _.map(response.items, function(item) {
-          return new AdsModel(item);
-        });
-        app.adsCollection = app.blacklistService.createAdsList(models);
+      return app.carAdsService
+        .getResults(averageCartype)
+        .done(function(response) {
+          var models = _.map(response.items, function(item) {
+            return new AdsModel(item);
+          });
+          app.adsCollection = app.blacklistService.createAdsList(models);
       });
     };
 
@@ -75,11 +77,6 @@ define(
     ).done(function() {
         // fetch results from mobile.de
         app.update();
-
-        var details = new DetailsModel({id: "205844426"});
-        details.fetch({beforeSend: function(xhr) {xhr.setRequestHeader('Accept-Language', 'de')}});
-
-        details.on("sync", function() { console.log(details) });
 
         app.router = new Router();
         Backbone.history.start();
