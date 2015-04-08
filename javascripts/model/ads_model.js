@@ -16,8 +16,8 @@ define(["backbone", "app", "underscore"], function(Backbone, app, _) {
 
       _.each(baseValueMapping, function(mappingKey, key) {
         if (self.validateHashes[key]) {
-          if (_.isString(self.validateHashes)) {
-            app.ratings.addBaseValue(mappingKey, self.validateHashes[key]);
+          if (_.isString(self.validateHashes[key])) {
+            app.ratings.addBaseValue(mappingKey, self.validateHashes[key].trim());
           } else if (_.isFunction(mappingKey)) {
             mappingKey(self.validateHashes[key]);
           }

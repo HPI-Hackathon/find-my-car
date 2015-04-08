@@ -49,9 +49,11 @@ define([
       // converters
       addBaseValue: function(category, name) {
         var attr = _.clone(_.find(this.get(category), { name: name }));
+
         if (attr !== undefined) {
-          var attrs = _.clone(this.get(category));
           attr.score++;
+          var attrs = _.clone(this.get(category));
+          console.log(attr, attrs, category, name);
           for (var i = 0; i < attrs.length; i++) {
             if (attrs[i].name == attr.name) {
               attrs[i] = attr;
@@ -60,6 +62,7 @@ define([
           }
           //sattrs[attrs.indexOf(attr)] = attr;
           this.set(category, attrs);
+          console.log(this.get(category));
         }
       },
 
@@ -78,7 +81,7 @@ define([
       },
 
       getFullScore: function(category) {
-        
+
         return _(this.attributes[category]).pluck("score")
           .reduce(function(memo, num) { return memo + num; }, 0);
       },
