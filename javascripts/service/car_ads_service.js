@@ -19,7 +19,7 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
       };
 
       // Cartypes
-      for (var carclass in averageCartype.get("carclass"))
+      for (var carclass in averageCartype.get("carclasses"))
         queryObject.c.push(carclass);
 
       // Colors
