@@ -141,12 +141,16 @@ define([
         return max[max.length-1];
       },
 
-      getPriceCategory: function(amount){
-        return _.find( this.attributes["priceclasses"], 
-            function(pclass){ 
-              return pclass.value.from >= amount && pclass.value.to <= amount;
-      }).name;
+      getPriceCategory: function(amountString) {
+        var amount = parseInt(amountString);
+        debugger;
+        var priceclass = _.find(this.attributes.priceclasses, function(pclass) {
+          return pclass.value.from <= amount && pclass.value.to <= amount;
+        });
 
+        if (priceclass.name) {
+          return priceclass.name;
+        }
       },
 
       generateAverageCartype: function() {

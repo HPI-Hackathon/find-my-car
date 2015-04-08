@@ -28,6 +28,10 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     car: function() {
+      if (!app.adsCollection || app.adsCollection.isEmpty()) {
+        app.router.navigate("#", { trigger: true });
+      }
+
       var self = this;
       require(["views/car_view", "model/details_model"], function(CarView, DetailsModel) {
         var model = app.adsCollection.shift();
