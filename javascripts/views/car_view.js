@@ -15,14 +15,24 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     			  {
     			 	label: "Autotyp",
     			 	tag: "carclass",
-    			 	value: this.detailsModel.get("category")
+    			 	value: this.detailsModel.get("category"),
+            dataValue: this.detailsModel.get("category")
     			  },
     			 {
     			 	label: "Kaufpreis",
     			 	tag: "price",
-    			 	value: this.detailsModel.get("price").grs.amount
+    			 	value: this.detailsModel.get("price").gross,
+            dataValue: this.detailsModel.get("price").grs.amount
     			 }
-    			].concat(this.detailsModel.attributes),
+    			].concat(
+            _.map(this.detailsModel.attributes.attributes, function(attr) {
+              attr.dataValue = attr.value;
+              if (!attr.tag) {
+                attr.tag = attr.value;
+              }
+              return attr;
+            })
+          ),
   			images: this.model.get("images"),
   			title: this.model.get("title"),
   			url: this.model.get("url"),
@@ -48,9 +58,9 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     },
 
     checkboxChange: function(event) {
-      console.log(event);
+      console.log(event.target.attributes["data-value"], event);
       if (event.target.checked) {
-        this.model.setValue(event.target.name, event.target.attributes[value]);
+        this.model.setValue(event.target.name, event.target.attributes["data-value"].value);
       } else {
         this.model.unsetValue(event.target.name);
       }

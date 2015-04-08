@@ -22,7 +22,6 @@ define(["app", "underscore", "collection/blacklist_collection"], function(app, _
         }
       });
 
-
       return new BlacklistCollection(_.sample(adsList, 10));
     }
 

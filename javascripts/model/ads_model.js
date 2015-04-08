@@ -1,8 +1,7 @@
 define(["backbone", "app", "underscore"], function(Backbone, app, _) {
     return Backbone.Model.extend({
-    // data attributes
-    defauls:{
-    	validateHashes: {}
+    initialize: function() {
+      this.validateHashes = {};
     },
 
     // converter
@@ -13,13 +12,14 @@ define(["backbone", "app", "underscore"], function(Backbone, app, _) {
         "numSeat": "seats",
         "price": function(value) { app.ratings.addBaseValue("priceclasses", app.ratings.getPriceCategory(value)); }
       };
+      var self = this;
 
       _.each(baseValueMapping, function(mappingKey, key) {
-        if (this.attributes.validateHashes[key]) {
-          if (_.isString(this.attributes.validateHashes)) {
-            app.ratings.addBaseValue(mappingKey, this.attributes.validateHashes[key]);
+        if (self.validateHashes[key]) {
+          if (_.isString(self.validateHashes)) {
+            app.ratings.addBaseValue(mappingKey, self.validateHashes[key]);
           } else if (_.isFunction(mappingKey)) {
-            mappingKey(this.attributes.validateHashes[key]);
+            mappingKey(self.validateHashes[key]);
           }
         }
       });
@@ -28,11 +28,11 @@ define(["backbone", "app", "underscore"], function(Backbone, app, _) {
     },
 
     setValue: function(key, value) {
-    	this.attributes.validateHashes[key] = value;
+    	this.validateHashes[key] = value;
     },
 
     unsetValue: function(key) {
-    	delete this.attributes.validateHashes[key];
+    	delete this.validateHashes[key];
     },
 
     });

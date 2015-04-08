@@ -12,7 +12,6 @@ define([
     	getProgress: function(){
     		var finishedAds = this.totalAmount - this.models.length;
     		return finishedAds / this.totalAmount * 100;
-
     	}
     });
 });

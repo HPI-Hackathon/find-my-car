@@ -28,6 +28,10 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     car: function() {
+      if (!app.adsCollection || app.adsCollection.isEmpty()) {
+        app.router.navigate("#", { trigger: true });
+      }
+
       var self = this;
       require(["views/car_view", "model/details_model"], function(CarView, DetailsModel) {
         var model = app.adsCollection.shift();
@@ -42,6 +46,7 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     next: function() {
+      this.scrollToTop();
       if (app.adsCollection.isEmpty()) {
         app.router.navigate("#", { trigger: true });
         return;
@@ -60,6 +65,10 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
       }
 
       this.active = view;
+    },
+
+    scrollToTop: function() {
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
 
   });
