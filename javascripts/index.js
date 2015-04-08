@@ -17,8 +17,9 @@ define(
   "model/userprofile_model",
   "model/average_cartype_model",
   "model/basevalues_model",
-  "model/ads_model"],
-  function(_, $, app, Router, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, BlacklistService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel, AdsModel) {
+  "model/ads_model",
+  "model/details_model"],
+  function(_, $, app, Router, RoutesData, UserData, RouteValidatorService, ProfileValidatorService, CarAdsService, BlacklistService, CartypeCollection, UserProfileModel, AverageCartypeModel, BaseValuesModel, AdsModel, DetailsModel) {
 
     function initializeRoutesData() {
       var rawCartypes = _.map(RoutesData.routes, function(route) {
@@ -72,6 +73,14 @@ define(
       app.userProfile.convertAddress(), // convert address to latlon
       app.userProfile.getPricePerSMeter()
     ).done(function() {
+        // fetch results from mobile.de
+        update();
+
+        var details = new DetailsModel({id: "205844426"});
+        details.fetch({beforeSend: function(xhr) {xhr.setRequestHeader('Accept-Language', 'de')}});
+
+        details.on("sync", function() { console.log(details) });
+
         app.router = new Router();
         Backbone.history.start();
       }
