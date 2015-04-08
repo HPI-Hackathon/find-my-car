@@ -16,35 +16,38 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     cars: function() {
-      var self = this;
-
       // fetch data from mobile.de
       app.update().done(function() {
         if (app.adsCollection.isEmpty()) {
-          app.router.navigate("#");
+          app.router.navigate("#", { trigger: true });
           return;
         }
 
-        self.car();
+        app.router.navigate("#car", { trigger: true });
       });
     },
 
     car: function() {
       var self = this;
-      require(["views/car_view"], function(CarView) {
+      require(["views/car_view", "model/details_model"], function(CarView, DetailsModel) {
         var model = app.adsCollection.shift();
-        var view = new CarView({ model: model });
-        self.changePage(view);
+        var detailsModel = new DetailsModel({ id: model.id });
+
+        detailsModel.fetch().done(function() {
+          var view = new CarView({ model: model, detailsModel: detailsModel });
+          self.changePage(view);
+        });
+
       });
     },
 
     next: function() {
       if (app.adsCollection.isEmpty()) {
-        app.router.navigate("#");
+        app.router.navigate("#", { trigger: true });
         return;
       }
 
-      app.router.navigate("#car");
+      app.router.navigate("#car", { trigger: true });
     },
 
     changePage: function(view) {
