@@ -3,6 +3,8 @@ HPI Hackathon
 
 Find your perfect car based on your composed profile.
 
+<img src="http://i.imgur.com/ijFm18k.png" text" height="300px">
+
 ![alt tag](http://i.imgur.com/ijFm18k.png =100px)
 
 
