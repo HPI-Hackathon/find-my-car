@@ -16,20 +16,23 @@ define(["backbone", "jquery", "app"], function(Backbone, $, app) {
     },
 
     cars: function() {
+      var self = this;
+
       // fetch data from mobile.de
       app.update().done(function() {
         if (app.adsCollection.isEmpty()) {
           app.router.navigate("#");
           return;
         }
-        app.router.navigate("#car");
+
+        self.car();
       });
     },
 
     car: function() {
       var self = this;
       require(["views/car_view"], function(CarView) {
-        var model = app.adsCollection.unshift();
+        var model = app.adsCollection.shift();
         var view = new CarView({ model: model });
         self.changePage(view);
       });
