@@ -143,7 +143,6 @@ define([
 
       getPriceCategory: function(amountString) {
         var amount = parseInt(amountString);
-        debugger;
         var priceclass = _.find(this.attributes.priceclasses, function(pclass) {
           return pclass.value.from <= amount && pclass.value.to <= amount;
         });
