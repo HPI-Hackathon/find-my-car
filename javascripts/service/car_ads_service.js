@@ -13,7 +13,9 @@ define(["underscore", "jquery", "app"], function(_, $, app) {
         psz: 100,
         ll: null,
         dam: 0,
-        ao: "PICTURES"
+        ao: "PICTURES",
+        sb: "ml",
+        rtd: 1
       };
 
       // Cartypes
