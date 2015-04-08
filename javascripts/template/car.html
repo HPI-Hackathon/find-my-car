@@ -30,15 +30,20 @@
   </div>
 
   <% _.each(attributes, function(attr) { %>
+      <div class="col-xs-2">
+        <input id="<%= attr.tag %>" class="pull-right" type="checkbox" name="<%= attr.tag %>" data-value="  <%= attr.dataValue %>"><label class="pull-right" for="<%= attr.tag %>"></label>
+      </div>
       <div class="row">
-        <div class="col-xs-6">
-          <p><%= attr.label %>: <%= attr.value %></p>
-        </div>
-
-        <div class="col-xs-6">
-          <input id="<%= attr.tag %>" class="pull-right" type="checkbox" name="<%= attr.tag %>" data-value="<%= attr.dataValue %>"><label class="pull-right" for="<%= attr.tag %>"></label>
+        <div class="col-xs-8">
+          <div class="category">
+            <%= attr.label %>:
+          </div>
+          <div class="value">
+            <b><%= attr.value %></b>
+          </div>
         </div>
       </div>
+      <hr>
   <% }); %>
 
   <div class="row">

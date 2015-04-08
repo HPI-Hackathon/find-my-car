@@ -5,6 +5,10 @@
     "animate"
   ;
 
+html, body {
+    height: 100%;
+}
+
 body {
     padding-top: 50px; /* Required for fixed navbar */
 }
@@ -38,6 +42,29 @@ $brandDefault: #FFFFFF;
   padding: 12px;
   color: white;
   opacity: 0.8;
+
+/* Footer */
+#wrap {
+  min-height: 100%;
+}
+#main {
+  overflow:auto;
+  padding-bottom:100px; /* this needs to be bigger than footer height*/
+}
+.footer {
+  position: relative;
+  margin-top: -100px; /* negative value of footer height */
+  height: 100px;
+  clear:both;
+  padding-top:20px;
+}
+
+/* Car attributes */
+.category {
+    color: #9E9E9E;
+}
+.value {
+    font-size: 16px;
 }
 
 /* Checkbox */
