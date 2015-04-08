@@ -18,8 +18,8 @@ define(["backbone"], function(Backbone) {
         var mergedCartype = this.clone();
 
         mergedCartype.set({
-          min_price: parseInt(mergedCartype.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)),
-          max_price: parseInt(mergedCartype.get("max_price") * weighting + otherCartype.get("max_price") *(1 - weighting)),
+          min_price: 0.5 * parseInt(mergedCartype.get("min_price") * weighting + otherCartype.get("min_price") *(1 - weighting)),
+          max_price: 2 * parseInt(mergedCartype.get("max_price") * weighting + otherCartype.get("max_price") *(1 - weighting)),
 
           min_seats: parseInt(mergedCartype.get("min_seats") * weighting + otherCartype.get("min_seats") *(1 - weighting)),
           max_seats: parseInt(mergedCartype.get("max_seats") * weighting + otherCartype.get("max_seats") *(1 - weighting)),
