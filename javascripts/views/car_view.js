@@ -24,12 +24,13 @@ define(["backbone", "app", "text!template/car.html"], function(Backbone, app, te
     			images: this.model.get("images"),
     			title: this.model.get("title"),
     			url: this.model.get("url"),
-    			description: this.detailsModel.get("description")
+    			description: this.detailsModel.get("description"),
+    			percentage: app.adsCollection.getProgress()
     	};
     },
 
     render: function() {
-      this.$el.html(_.template(template)(this.model.attributes));
+      this.$el.html(_.template(template)(this.templateHelper));
       return this;
     }
   });
