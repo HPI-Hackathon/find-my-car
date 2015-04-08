@@ -34,34 +34,25 @@ $brandDefault: #FFFFFF;
 }
 
 /* Checkbox */
-/*
-input[type="checkbox"] {
-    opacity:0;
-    height: 16px;
-    width: 17px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
+input[type=checkbox] {
+display:none;
 }
 
-input[type="checkbox"] + label{
-    background-image: url(../res/unchecked.png);
-    height: 16px;
-    width: 17px;
-    display:inline-block;
-    padding: 0 0 0 0px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-input[type="checkbox"]:checked + label{
-    background-image: url(../res/checked.png);
-    height: 16px;
-    width: 17px;
+input[type=checkbox] + label
+{
+    background: url("../res/unchecked.png") center no-repeat;
+    background-size: 20px 20px;
+    height: 20px;
+    width: 20px;
     display:inline-block;
     padding: 0 0 0 0px;
 }
-*/
+input[type=checkbox]:checked + label
+{
+    background: url("../res/checked.png") center no-repeat;
+    background-size: 20px 20px;
+    height: 20px;
+    width: 20px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
